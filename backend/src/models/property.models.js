@@ -17,10 +17,6 @@ const propertySchema = new mongoose.Schema({
     addressLine2: {
         type: String,
     },
-    pinCode: {
-        type: String,
-        required: [true, "PinCode is required."],
-    },
     location: {
         type: {
             district: String,
@@ -28,6 +24,15 @@ const propertySchema = new mongoose.Schema({
             country: String,
         },
         required: [true, "location is required."], 
+    },
+    facility: {
+        type: {
+            bedroom: Number,
+            bathroom: Number,
+            area: Number,
+            ambience: String,
+        },
+        required: [true, "facility is required."],
     },
     videoFile: {
         type: {     // cloudinary url for videofile
@@ -47,6 +52,10 @@ const propertySchema = new mongoose.Schema({
     views: {
         type: Number,
         default: 0,
+    },
+    price: {
+        type: Number,
+        required: [true, "Price is required"]
     },
     owner: {
         type: mongoose.Types.ObjectId,
