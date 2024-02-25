@@ -10,9 +10,6 @@ const propertySchema = new mongoose.Schema({
         type: String,
         required: [true, "Property description is required."],
     },
-    category: {
-        type: String,
-    },
     addressLine1: {
         type: String,
         required: [true, "Property address is required."],
