@@ -16,6 +16,5 @@ app.use(cookieParser());    // "cookie" is used to store secure cookies in the u
 // Routes Imports
 import userRouter from "./routes/user.routes.js";
 
-
 // Routes Declarations
 app.use("/api/v1/users", userRouter);
