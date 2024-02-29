@@ -20,4 +20,5 @@ userRouter.route("/profile/:username").get(verifyJWT, getUserProfile);
 userRouter.route("/wishlist").get(verifyJWT, getWishlist); 
 userRouter.route("/delete-user").delete(verifyJWT, deleteUser); 
 
+
 export default userRouter;

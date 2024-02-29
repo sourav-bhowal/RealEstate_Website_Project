@@ -18,11 +18,7 @@ const propertySchema = new mongoose.Schema({
         type: String,
     },
     location: {
-        type: {
-            district: String,
-            state: String,
-            country: String,
-        },
+        type: String,
         required: [true, "location is required."], 
     },
     facility: {
@@ -40,15 +36,14 @@ const propertySchema = new mongoose.Schema({
             public_id: String,
         }   
     },
-    pictures: [
-        {
-            type: {     // cloudinary url for picturefile
-                url: String,
-                public_id: String,
-            },   
-            required: [true, "Pictures are required."],
+    pictures: {
+        type: {     // cloudinary url for picturefile
+            url: String,
+            public_id: String,
+        },   
+        required: [true, "Pictures are required."],
         }
-    ],
+    ,
     views: {
         type: Number,
         default: 0,
