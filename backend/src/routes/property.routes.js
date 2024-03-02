@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { getAllPropertys, getPropertyById, postProperty, updatePropertyDetails, deleteProperty } from "../controllers/property.controller.js";
+import { getAllPropertys, getPropertyById, postProperty, updatePropertyDetails, deleteProperty, addPropertyToWishList } from "../controllers/property.controller.js";
 
 
 // Creating router
@@ -45,5 +45,7 @@ propertyRouter
         updatePropertyDetails
     )
     .delete(deleteProperty);
+
+propertyRouter.route("/wishlist/:propertyId").patch(addPropertyToWishList);
 
 export default propertyRouter;

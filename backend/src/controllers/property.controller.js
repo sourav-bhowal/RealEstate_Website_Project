@@ -129,6 +129,8 @@ export const postProperty = asyncHandler( async(req, res) => {
     });
     
     if (!property) {
+        await deleteOnCloudinaryVideo(video.public_id);
+        await deleteOnCloudinary(pictures.public_id);
         throw new apiError(400, "Error while creating new property.")
     }
 
@@ -343,7 +345,8 @@ export const deleteProperty = asyncHandler( async (req, res) => {
 
     // Storing videoFile and images
     const videoFile = deleteProperty?.videoFile.public_id;
-    const picturesFile = deleteProperty?.pictures.public_id;
+    const picturesFile = deleteProperty?.pictures.map((picturesFile) => picturesFile.public_id);
+    // console.log(picturesFile)
 
     // If the video owner and current logged in user are same the delete the video & its assets
     if (deleteProperty.owner.toString() === req.user._id.toString()) {
@@ -382,3 +385,24 @@ export const deleteProperty = asyncHandler( async (req, res) => {
 } );
 
 
+export const addPropertyToWishList = asyncHandler( async (req, res) => {
+
+    const { propertyId } = req.params;
+
+    if (!isValidObjectId(propertyId)) {
+        throw new apiError(400, "Invalid object id.");
+    }
+    
+    await User.findByIdAndUpdate(
+        req?.user._id,
+        {
+          $addToSet: {wishList: propertyId}
+        },
+        {new: true}
+    )
+
+    return res
+    .status(200)
+    .json(new apiResponse(200, {}, "property added to wishlist"))
+
+} );

@@ -36,13 +36,13 @@ const propertySchema = new mongoose.Schema({
             public_id: String,
         }   
     },
-    pictures: {
+    pictures: [{
         type: {     // cloudinary url for picturefile
             url: String,
             public_id: String,
         },   
         required: [true, "Pictures are required."],
-        }
+        }]
     ,
     views: {
         type: Number,
