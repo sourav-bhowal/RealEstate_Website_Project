@@ -3,7 +3,6 @@ import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { purchaseProperty } from "../controllers/purchase.controller.js";
 
 
-
 const purchaseRouter = Router();
 
 purchaseRouter.use(verifyJWT);
