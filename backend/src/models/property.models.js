@@ -52,6 +52,10 @@ const propertySchema = new mongoose.Schema({
         type: Number,
         required: [true, "Price is required"]
     },
+    soldOut: {
+        type: Boolean,
+        default: false,
+    },
     owner: {
         type: mongoose.Types.ObjectId,
         ref: "User",

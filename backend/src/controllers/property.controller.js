@@ -154,7 +154,7 @@ export const getPropertyById = asyncHandler( async (req, res) => {
     const searchedProperty =  await Property.findByIdAndUpdate(
         propertyId,
         {
-            $inc: {views: 1}
+            $inc: {views: 1},
         },
         {new: true}
     )

@@ -5,10 +5,6 @@ const purchaseSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "Property"
     },
-    soldBy: {
-        type: mongoose.Types.ObjectId,
-        ref: "User"
-    },
     soldTo: {
         type: mongoose.Types.ObjectId,
         ref: "User"
