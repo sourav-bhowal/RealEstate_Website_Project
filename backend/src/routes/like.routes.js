@@ -6,7 +6,7 @@ const likeRouter = Router();
 likeRouter.use(verifyJWT); // Apply verifyJWT middleware to all routes in this file
 
 likeRouter.route("/toggle/v/:propertyId").post(likeProperty);
-likeRouter.route("/toggle/c/:reviewId").post(likeReview);
+likeRouter.route("/toggle/r/:reviewId").post(likeReview);
 likeRouter.route("/propertys").get(getLikedPropertys);
 
 export default likeRouter;

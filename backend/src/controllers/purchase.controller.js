@@ -4,13 +4,13 @@ import {asyncHandler} from "../utils/asyncHandler.js"
 import mongoose, {isValidObjectId} from "mongoose"
 // import { User } from "../models/user.models.js"
 import {Property} from "../models/property.models.js"
-import { Purchase } from "../models/purchase.models.js"
+import { Purchase } from "../models/Purchase.models.js"
 
 
 export const purchaseProperty = asyncHandler( async (req, res) => {
 
     // Take property Id from user
-    const {propertyId} = req.params;
+    const {propertyId} = req.params; 
 
     if (!isValidObjectId(propertyId)) {
         throw new apiError(400, "Invalid Property Id.")

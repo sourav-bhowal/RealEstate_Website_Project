@@ -406,3 +406,4 @@ export const addPropertyToWishList = asyncHandler( async (req, res) => {
     .json(new apiResponse(200, {}, "property added to wishlist"))
 
 } );
+

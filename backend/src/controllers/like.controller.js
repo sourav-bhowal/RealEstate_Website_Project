@@ -1,9 +1,9 @@
-import { Like } from "../models/like.models";
-import { Property } from "../models/property.models";
-import { Review } from "../models/review.models";
-import apiError from "../utils/apiError";
-import apiResponse from "../utils/apiResponse";
-import { asyncHandler } from "../utils/asyncHandler";
+import { Like } from "../models/like.models.js";
+import { Property } from "../models/property.models.js";
+import { Review } from "../models/review.models.js";
+import apiError from "../utils/apiError.js";
+import apiResponse from "../utils/apiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import mongoose, {isValidObjectId} from "mongoose";
 
 
@@ -102,7 +102,8 @@ export const getLikedPropertys = asyncHandler( async (req, res) => {
     const likedPropertys = await Like.aggregate([
         {
             $match: {
-                likedBy: new mongoose.Types.ObjectId(req.user?._id)
+                likedBy: new mongoose.Types.ObjectId(req.user?._id),
+                property: {$exists: true}
             }
         },
         {
@@ -110,36 +111,34 @@ export const getLikedPropertys = asyncHandler( async (req, res) => {
                 from: "properties",
                 localField: "property",
                 foreignField: "_id",
-                as: "likedProperty",
+                as: "likedPropertys",
                 pipeline: [
                     {
-                        $lookup: {
-                            from: "users",
-                            localField: "owner",
-                            foreignField: "_id",
-                            as: "owner",
-                            pipeline: [
-                                {
-                                    $project: {
-                                        fullName: 1,
-                                        username: 1,
-                                        email: 1
-                                    }
-                                }
-                            ]
+                        $project: {
+                            name: 1,
+                            price: 1,    
                         }
                     }
                 ]
             }
         },
         {
+            $addFields: {
+                likedProperty: {
+                    $first: "$likedPropertys"
+                }
+            }
+        },
+        {
             $project: {
-                likeProperty: 1
+                likedProperty: 1
             }
         }
+        
+        
     ]);
 
-    if (!likedPropertys?.length) {
+    if (!likedPropertys) {
         throw new apiError(404, "user has no liked propertys.");
     }
 

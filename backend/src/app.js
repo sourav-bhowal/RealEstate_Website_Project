@@ -18,9 +18,13 @@ import userRouter from "./routes/user.routes.js";
 import propertyRouter from './routes/property.routes.js';
 import purchaseRouter from './routes/purchase.routes.js';
 import likeRouter from './routes/like.routes.js';
+import reviewRouter from './routes/review.routes.js';
+import dashboardRouter from './routes/dashboard.routes.js';
 
 // Routes Declarations
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/propertys", propertyRouter);
 app.use("/api/v1/purchase", purchaseRouter);
 app.use("/api/v1/likes", likeRouter);
+app.use("/api/v1/reviews", reviewRouter);
+app.use("/api/v1/dashboard", dashboardRouter);
