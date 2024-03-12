@@ -74,10 +74,16 @@ export const getMyPurchasedPropertys = asyncHandler( async(req, res) => {
             }
         }
     ]);
-
+    
     // Returning response
-    return res
-    .status(200)
-    .json(new apiResponse(200, myPurchasedPropertys, "User purchased propertys fetched successfully."));
-
+    if (myPurchasedPropertys.length > 0) {
+        return res
+        .status(200)
+        .json(new apiResponse(200, myPurchasedPropertys, "User purchased propertys fetched successfully."));
+    
+    }
+    else {
+        return res.status(404).json(new apiResponse(404, {}, "No propertys found"));
+    }
+   
 } );

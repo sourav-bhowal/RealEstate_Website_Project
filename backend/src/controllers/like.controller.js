@@ -112,28 +112,16 @@ export const getLikedPropertys = asyncHandler( async (req, res) => {
                 localField: "property",
                 foreignField: "_id",
                 as: "likedPropertys",
-                pipeline: [
-                    {
-                        $project: {
-                            name: 1,
-                            price: 1,    
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            $addFields: {
-                likedProperty: {
-                    $first: "$likedPropertys"
-                }
             }
         },
         {
             $project: {
-                likedProperty: 1
+                likedPropertys: {
+                    name: 1
+                }
             }
         }
+        
         
         
     ]);
